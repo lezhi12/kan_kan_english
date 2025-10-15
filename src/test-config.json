@@ -1,0 +1,59 @@
+[
+  {
+    "type": "sentence-building",
+    "sentence": "The cat is sleeping on the sofa.",
+    "translation": "猫在沙发上睡觉。",
+    "folderName": "Unit1/Lesson1"
+  },
+  {
+    "type": "matching",
+    "sentence": "家庭成员",
+    "translation": "学习家庭成员的英文单词",
+    "words": ["father", "mother", "brother", "sister"],
+    "wordTranslations": ["爸爸", "妈妈", "哥哥/弟弟", "姐姐/妹妹"],
+    "folderName": "Unit1/Lesson1"
+  },
+  {
+    "type": "spelling",
+    "sentence": "cat",
+    "translation": "猫",
+    "word": "cat",
+    "phonetic": "/kæt/",
+    "meaning": "猫",
+    "distractors": ["狗", "鸟", "鱼"],
+    "folderName": "Unit1/Lesson1"
+  },
+  {
+    "type": "fill-in-blank",
+    "sentence": "I ___ to school every day",
+    "translation": "我每天去上学",
+    "blanks": ["go"],
+    "folderName": "Unit1/Lesson2"
+  },
+  {
+    "type": "dialogue",
+    "question": "What is your name",
+    "answer": "My name is Tom",
+    "translation": "你叫什么名字？我叫汤姆。",
+    "showQuestion": true,
+    "folderName": "Unit1/Lesson2"
+  },
+  {
+    "type": "sentence-building",
+    "sentence": "There are so many animals on the farm.",
+    "translation": "农场里有很多动物。",
+    "folderName": "Unit3/class9"
+  },
+  {
+    "type": "sentence-building",
+    "sentence": "The dog is running in the garden.",
+    "translation": "狗在花园里跑步。",
+    "folderName": "Unit3/class9"
+  },
+  {
+    "type": "sentence-building",
+    "sentence": "Birds can fly in the sky.",
+    "translation": "鸟儿可以在天空中飞翔。",
+    "folderName": "Unit3/class9"
+  }
+]
