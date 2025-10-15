@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { ArrowLeft, RotateCcw, Volume2, Lightbulb } from 'lucide-react';
@@ -105,9 +105,12 @@ export function DialogueGame({
     if (userSentence.toLowerCase().trim() === correctSentence.toLowerCase().trim()) {
       setIsComplete(true);
       speakText('Perfect!');
-      setTimeout(() => {
-        if (onBack) onBack();
-      }, 2000);
+      // 只有在没有下一题选项时才自动返回，否则等待用户点击下一题
+      if (!onNext) {
+        setTimeout(() => {
+          if (onBack) onBack();
+        }, 2000);
+      }
     } else {
       setShowError(true);
       speakText('Try again!');
@@ -230,12 +233,13 @@ export function DialogueGame({
                 ) : (
                   <div className="flex flex-wrap gap-2">
                     {selectedWords.map((word, index) => (
-                      <WordBlock
-                        key={`selected-${index}`}
-                        word={word}
-                        onClick={() => handleSelectedWordClick(index)}
-                        disabled={showAnswer}
-                      />
+                      <React.Fragment key={`selected-${index}-${word}`}>
+                        <WordBlock
+                          word={word}
+                          onClick={() => handleSelectedWordClick(index)}
+                          variant="selected"
+                        />
+                      </React.Fragment>
                     ))}
                   </div>
                 )}
@@ -255,12 +259,13 @@ export function DialogueGame({
               <p className="text-sm text-gray-600 mb-3 text-center">可选单词</p>
               <div className="flex flex-wrap gap-3 justify-center">
                 {availableWords.map((word, index) => (
-                  <WordBlock
-                    key={`available-${index}`}
-                    word={word}
-                    onClick={() => handleWordClick(word, index)}
-                    disabled={showAnswer}
-                  />
+                  <React.Fragment key={`available-${index}-${word}`}>
+                    <WordBlock
+                      word={word}
+                      onClick={() => handleWordClick(word, index)}
+                      variant="available"
+                    />
+                  </React.Fragment>
                 ))}
               </div>
             </div>

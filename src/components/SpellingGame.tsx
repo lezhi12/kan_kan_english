@@ -57,6 +57,15 @@ export function SpellingGame({ word, phonetic, meaning, distractors, onComplete,
     setCorrectOptionIndex(shuffled.indexOf(meaning));
   }, [meaning, distractors]);
 
+  // 当题目内容变化时，重置所有状态
+  useEffect(() => {
+    setSpelledWord([]);
+    setSelectedMeaning(null);
+    setShowResult(false);
+    setIsCorrect(false);
+    setShowAnswer(false);
+  }, [word, meaning]);
+
   // 播放单词发音（更慢更清楚）
   const playWordSound = () => {
     if ('speechSynthesis' in window) {

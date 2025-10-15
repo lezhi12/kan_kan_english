@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { ArrowLeft, RotateCcw, Sparkles } from 'lucide-react';
+import { ArrowLeft, RotateCcw, Sparkles, Volume2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { WordBlock } from './WordBlock';
-import { speakWord, speakEncouragement, initSpeech } from '../utils/speech';
+import { speakWord, speakEncouragement, initSpeech, speakText } from '../utils/speech';
 
 interface WordGameProps {
   sentence: string;
@@ -123,9 +123,16 @@ export function WordGame({ sentence, translation, onBack, onNext, currentIndex, 
       <Card className="p-8 shadow-xl">
         {/* 中文提示 */}
         <div className="text-center mb-8">
-          <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-2xl shadow-lg">
+          <div className="inline-block bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-3 rounded-2xl shadow-lg flex items-center">
             <Sparkles className="w-5 h-5 inline-block mr-2" />
-            <span>{translation}</span>
+            <span className="mr-2">{translation}</span>
+            <button 
+              className="text-white hover:text-blue-100 transition-colors ml-2"
+              onClick={() => speakText(sentence)}
+              aria-label="播放英文句子"
+            >
+              <Volume2 className="w-5 h-5" />
+            </button>
           </div>
         </div>
 
@@ -135,12 +142,13 @@ export function WordGame({ sentence, translation, onBack, onNext, currentIndex, 
           <div className="min-h-[120px] bg-white border-2 border-dashed border-gray-300 rounded-xl p-4 flex flex-wrap gap-2 items-start">
             <AnimatePresence>
               {selectedWords.map((word, index) => (
-                <WordBlock
-                  key={`selected-${index}-${word}`}
-                  word={word}
-                  onClick={() => handleSelectedWordClick(index)}
-                  variant="selected"
-                />
+                <React.Fragment key={`selected-${index}-${word}`}>
+                  <WordBlock
+                    word={word}
+                    onClick={() => handleSelectedWordClick(index)}
+                    variant="selected"
+                  />
+                </React.Fragment>
               ))}
             </AnimatePresence>
             {selectedWords.length === 0 && (
@@ -155,12 +163,13 @@ export function WordGame({ sentence, translation, onBack, onNext, currentIndex, 
           <div className="min-h-[120px] bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4 flex flex-wrap gap-3 justify-center">
             <AnimatePresence>
               {availableWords.map((word, index) => (
-                <WordBlock
-                  key={`available-${index}-${word}`}
-                  word={word}
-                  onClick={() => handleWordClick(word, index)}
-                  variant="available"
-                />
+                <React.Fragment key={`available-${index}-${word}`}>
+                  <WordBlock
+                    word={word}
+                    onClick={() => handleWordClick(word, index)}
+                    variant="available"
+                  />
+                </React.Fragment>
               ))}
             </AnimatePresence>
           </div>
